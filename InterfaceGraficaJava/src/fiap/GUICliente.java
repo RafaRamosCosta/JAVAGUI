@@ -5,19 +5,17 @@ import java.awt.event.*;
 import java.awt.*;
 
 @SuppressWarnings("serial")
-public class GUIUsuario extends JFrame{
+public class GUICliente extends JPanel{
 	private JLabel lbNome, lbEndereco, lbNumero, lbBairro, lbCidade;
 	private JTextField tfNome, tfEndereco, tfNumero, tfBairro, tfCidade;
 	private JButton btSalvar, btCancelar;
 	
-	public GUIUsuario() {
+	public GUICliente() {
 		inicializarComponentes();
 		definirEventos();
 	}
 	
 	private void inicializarComponentes() {
-		setTitle("Cadastro de Cliente");
-		setBounds(0,0,400,300);
 		setLayout(null);
 		
 		// criando objetos para o formulário
@@ -72,16 +70,14 @@ public class GUIUsuario extends JFrame{
 		
 		btSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Dados salvos com sucesso!");
+				String dados = "Informações:\n\n";
+				dados += "Nome: " + tfNome.getText() + "\n";
+				dados += "Endereço: " + tfEndereco.getText() + "\n";
+				dados += "Número: " + tfNumero.getText() + "\n";
+				dados += "Bairro: " + tfBairro.getText() + "\n";
+				dados += "Cidade: " + tfCidade.getText() + "\n";
+				JOptionPane.showMessageDialog(null, dados);
 			}
 		});
-	}
-
-	public void abrir() {
-		GUIUsuario cliente = new GUIUsuario();
-		cliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Dimension tela = Toolkit.getDefaultToolkit().getScreenSize();
-		cliente.setLocation((tela.width - cliente.getSize().width) / 2, (tela.height - cliente.getSize().height) / 2);
-		cliente.setVisible(true);
 	}
 }
