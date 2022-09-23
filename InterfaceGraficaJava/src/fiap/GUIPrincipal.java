@@ -8,7 +8,7 @@ public class GUIPrincipal extends JFrame{
 	private Container contentPane;
 	private JMenuBar menuBar;
 	private JMenu menuArquivo, menuExemplos;
-	private JMenuItem menuItemSair, menuItemBotao, menuItemCaixaOpcao, menuItemRadio;
+	private JMenuItem menuItemSair, menuItemBotao, menuItemCaixaOpcao, menuItemRadio, menuItemLista, menuItemFotos;
 	
 	public GUIPrincipal() {
 		inicializarComponentes();
@@ -29,6 +29,8 @@ public class GUIPrincipal extends JFrame{
 		menuItemBotao = new JMenuItem("Botao");
 		menuItemCaixaOpcao = new JMenuItem("Caixa de opção");
 		menuItemRadio = new JMenuItem("Botão de Rádio");
+		menuItemLista = new JMenuItem("Lista de opções");
+		menuItemFotos = new JMenuItem("Lista de fotos");
 		setJMenuBar(menuBar);
 		menuBar.add(menuArquivo);
 		menuBar.add(menuExemplos);
@@ -36,6 +38,8 @@ public class GUIPrincipal extends JFrame{
 		menuExemplos.add(menuItemBotao);
 		menuExemplos.add(menuItemCaixaOpcao);
 		menuExemplos.add(menuItemRadio);
+		menuExemplos.add(menuItemLista);
+		menuExemplos.add(menuItemFotos);
 	}
 	
 	private void definirEventos() {
@@ -68,6 +72,24 @@ public class GUIPrincipal extends JFrame{
 				GUIRadio radio = new GUIRadio();
 				contentPane.removeAll();
 				contentPane.add(radio);
+				contentPane.validate();
+			}
+		});
+		
+		menuItemLista.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				GUILista lista = new GUILista();
+				contentPane.removeAll();
+				contentPane.add(lista);
+				contentPane.validate();
+			}
+		});
+		
+		menuItemFotos.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				GUIListaComFotos listaFotos = new GUIListaComFotos();
+				contentPane.removeAll();
+				contentPane.add(listaFotos);
 				contentPane.validate();
 			}
 		});

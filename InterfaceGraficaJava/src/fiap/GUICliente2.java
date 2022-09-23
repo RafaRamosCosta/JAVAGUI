@@ -1,17 +1,21 @@
 package fiap;
 
 import javax.swing.*;
+import javax.swing.event.*;
 import java.awt.event.*;
-import java.awt.*;
+
 
 @SuppressWarnings("serial")
 public class GUICliente2 extends JPanel{
-	private JLabel lbNome, lbEndereco, lbNumero, lbBairro, lbCidade, lbSexo, lbAparelhos;
+	private JLabel lbNome, lbEndereco, lbNumero, lbBairro, lbCidade, lbSexo, lbAparelhos, lbFoto;
 	private JTextField tfNome, tfEndereco, tfNumero, tfBairro, tfCidade;
 	private JButton btSalvar, btCancelar;
 	private ButtonGroup btGroup;
 	private JRadioButton rbMasculino, rbFeminino;
 	private JCheckBox ckCelular, ckVideoGame, ckComputador, ckTablet;
+	private JList<String> listaFotos;
+	private ImageIcon imagem; 
+	private JScrollPane spImagens;
 	
 	public GUICliente2() {
 		inicializarComponentes();
@@ -46,6 +50,15 @@ public class GUICliente2 extends JPanel{
 		ckTablet = new JCheckBox("Tablet");
 		btSalvar = new JButton("Salvar");
 		btCancelar = new JButton("Cancelar");
+		imagem = new ImageIcon();
+		String[] fotos = new String[10];
+		for (int i = 0; i < fotos.length; i++) {
+			fotos[i] = "Foto" + (i + 1);
+		}
+		listaFotos = new JList<String>(fotos);
+		lbFoto = new JLabel(imagem);
+		spImagens = new JScrollPane(listaFotos);
+		
 		
 		// definindo tamanho e posição dos objetos
 		lbNome.setBounds(10,30,60,25);
@@ -68,6 +81,8 @@ public class GUICliente2 extends JPanel{
 		ckTablet.setBounds(120, 340, 100, 25);
 		btSalvar.setBounds(90,380,100,25);
 		btCancelar.setBounds(195,380,100,25);
+		spImagens.setBounds(500, 30, 70, 150);
+		lbFoto.setBounds(600, 30, 180, 180);
 		
 		// adicionando os objetos ao formulário
 		add(lbNome);
@@ -90,6 +105,8 @@ public class GUICliente2 extends JPanel{
 		add(ckTablet);
 		add(btSalvar);
 		add(btCancelar);
+		add(spImagens);
+		add(lbFoto);
 	}
 	
 	private void definirEventos() {
@@ -99,9 +116,16 @@ public class GUICliente2 extends JPanel{
 			}
 		});
 		
+		listaFotos.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent e) {
+				imagem = new ImageIcon(getClass().getResource("Imagens/" + listaFotos.getSelectedValue() + ".png"));
+				lbFoto.setIcon(imagem);
+			}
+		});
+		
 		btSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String dados = "Informações:\n\n";
+				String dados = "Dados Cadastrados:\n\n";
 				dados += "Nome: " + tfNome.getText() + "\n";
 				dados += "Endereço: " + tfEndereco.getText() + "\n";
 				dados += "Número: " + tfNumero.getText() + "\n";
@@ -111,7 +135,7 @@ public class GUICliente2 extends JPanel{
 					dados += "Sexo: Masculino";
 				}
 				else dados += "Sexo: Feminino";
-				JOptionPane.showMessageDialog(null, dados);
+				JOptionPane.showMessageDialog(null, dados, "Informações", JOptionPane.INFORMATION_MESSAGE, imagem);
 			}
 		});
 	}
