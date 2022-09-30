@@ -8,7 +8,7 @@ public class GUIPrincipal extends JFrame{
 	private Container contentPane;
 	private JMenuBar menuBar;
 	private JMenu menuArquivo, menuExemplos;
-	private JMenuItem menuItemSair, menuItemBotao, menuItemCaixaOpcao, menuItemRadio, menuItemLista, menuItemFotos;
+	private JMenuItem menuItemSair, menuItemBotao, menuItemCaixaOpcao, menuItemRadio, menuItemLista, menuItemFotos, menuItemCkImg;
 	
 	public GUIPrincipal() {
 		inicializarComponentes();
@@ -31,6 +31,7 @@ public class GUIPrincipal extends JFrame{
 		menuItemRadio = new JMenuItem("Botão de Rádio");
 		menuItemLista = new JMenuItem("Lista de opções");
 		menuItemFotos = new JMenuItem("Lista de fotos");
+		menuItemCkImg = new JMenuItem("CheckBox Images");
 		setJMenuBar(menuBar);
 		menuBar.add(menuArquivo);
 		menuBar.add(menuExemplos);
@@ -40,6 +41,7 @@ public class GUIPrincipal extends JFrame{
 		menuExemplos.add(menuItemRadio);
 		menuExemplos.add(menuItemLista);
 		menuExemplos.add(menuItemFotos);
+		menuExemplos.add(menuItemCkImg);
 	}
 	
 	private void definirEventos() {
@@ -90,6 +92,14 @@ public class GUIPrincipal extends JFrame{
 				GUIListaComFotos listaFotos = new GUIListaComFotos();
 				contentPane.removeAll();
 				contentPane.add(listaFotos);
+				contentPane.validate();
+			}
+		});
+		menuItemCkImg.addActionListener(new ActionListener() {	
+			public void actionPerformed(ActionEvent e) {
+				GUIChkImg chkImg = new GUIChkImg();
+				contentPane.removeAll();
+				contentPane.add(chkImg);
 				contentPane.validate();
 			}
 		});
